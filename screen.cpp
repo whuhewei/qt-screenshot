@@ -102,6 +102,8 @@ void Screen::mousePressEvent(QMouseEvent *e)
     }
     else
     {
+        if( control )  //如果控制面板已经出现，则第二次以后的每一次鼠标按键都会使其暂时隐藏
+            control->hide();
         oldPoint = e->pos();
     }
 }
@@ -129,8 +131,6 @@ void Screen::mouseMoveEvent(QMouseEvent *e)
         else
         {
             QPoint tempPoint = e->pos();     //当前鼠标位置
-            if( control )  //如果控制面板已经出现，则第二次以后的每一次鼠标按键都会使其暂时隐藏
-                control->hide();
             int moveX = tempPoint.x() - oldPoint.x();  //鼠标移动的x距离
             int moveY = tempPoint.y() - oldPoint.y();   //鼠标移动的y距离
             switch( type )         //选区角落四个小矩形的位置
