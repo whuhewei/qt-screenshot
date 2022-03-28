@@ -23,7 +23,7 @@ Screen::Screen(QWidget *parent)
     //截取全屏
     pixmap = scrPix->grabWindow(0);
 
-    resolution = pixmap.width() / this->width();
+    resolution = 1.0 * pixmap.width() / this->width();
 
     //全局路径的初始化，一个全屏闭合回路
     globalPath.lineTo(pixmap.width() / resolution, 0);
