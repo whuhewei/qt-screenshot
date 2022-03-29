@@ -133,81 +133,135 @@ void Screen::mouseMoveEvent(QMouseEvent *e)
             QPoint tempPoint = e->pos();     //当前鼠标位置
             int moveX = tempPoint.x() - oldPoint.x();  //鼠标移动的x距离
             int moveY = tempPoint.y() - oldPoint.y();   //鼠标移动的y距离
-            switch( type )         //选区角落四个小矩形的位置
+            if(isDragRect)
             {
-                case RECT1:               //意思是第一次选区之后，分别拖动四个角落的小矩形时候，截图选区的变化
-                    pressedPoint.setY(pressedPoint.y() + moveY);  //右上角的矩形
-                    movePoint.setX(movePoint.x() + moveX);
-                    break;
-                case RECT2:
-                    pressedPoint.setX(pressedPoint.x() + moveX);    //左上角的矩形
-                    pressedPoint.setY(pressedPoint.y() + moveY);
-                    break;
-                case RECT3:
-                    pressedPoint.setX(pressedPoint.x() + moveX);  //左下角的矩形
-                    movePoint.setY(movePoint.y() + moveY);
-                    break;
-                case RECT4:
-                    movePoint.setX(movePoint.x() + moveX);     //右下角的矩形
-                    movePoint.setY(movePoint.y() + moveY);
-                    break;
-                case RECT:                  //指的是当鼠标在截图选区中按下左键然后拖动时候，截图选区的整体位置变化
+                isDragRect = true;
+                int tempPressX = pressedPoint.x() + moveX;
+                int tempPressY = pressedPoint.y() + moveY;
+                int tempMoveX = movePoint.x() + moveX;
+                int tempMoveY = movePoint.y() + moveY;
+                int deskWidth = pixmap.width();
+                int deskHeight = pixmap.height();
+                if( tempPressX < 0 )
+                {
+                    tempPressX = 0;
+                    tempMoveX = movePoint.x();
+                }
+                if( tempPressX > deskWidth)
+                {
+                    tempPressX = deskHeight;
+                }
+                if(tempPressY < 0)
+                {
+                    tempPressY = 0;
+                    tempMoveY = movePoint.y();
+                }
+                if( tempPressY > deskHeight)
                 {
 
-                    int tempPressX = pressedPoint.x() + moveX;
-                    int tempPressY = pressedPoint.y() + moveY;
-                    int tempMoveX = movePoint.x() + moveX;
-                    int tempMoveY = movePoint.y() + moveY;
-                    int deskWidth = pixmap.width();
-                    int deskHeight = pixmap.height();
-                    if( tempPressX < 0 )
-                    {
-                        tempPressX = 0;
-                        tempMoveX = movePoint.x();
-                    }
-                    if( tempPressX > deskWidth)
-                    {
-                        tempPressX = deskHeight;
-                    }
-                    if(tempPressY < 0)
-                    {
-                        tempPressY = 0;
-                        tempMoveY = movePoint.y();
-                    }
-                    if( tempPressY > deskHeight)
-                    {
-
-                        tempPressY = deskHeight;
-                    }
-                    if( tempMoveX < 0)
-                    {
-                        tempMoveX = 0;
-                    }
-                    if( tempMoveX > deskWidth)
-                    {
-                        tempMoveX = deskWidth;
-                        tempPressX = pressedPoint.x();
-                    }
-                    if( tempMoveY < 0)
-                    {
-                        tempMoveY = 0;
-                    }
-                    if( tempMoveY > deskHeight)
-                    {
-                        tempMoveY = deskHeight;
-                        tempPressY = pressedPoint.y();
-
-                    }
-                    pressedPoint.setX(tempPressX);    //鼠标在截图区域中拖动结束后，选区的位置
-                    pressedPoint.setY(tempPressY);
-                    movePoint.setX(tempMoveX);
-                    movePoint.setY(tempMoveY);
-                    break;
+                    tempPressY = deskHeight;
                 }
-                case NO:
-                    break;
-                default:
-                    break;
+                if( tempMoveX < 0)
+                {
+                    tempMoveX = 0;
+                }
+                if( tempMoveX > deskWidth)
+                {
+                    tempMoveX = deskWidth;
+                    tempPressX = pressedPoint.x();
+                }
+                if( tempMoveY < 0)
+                {
+                    tempMoveY = 0;
+                }
+                if( tempMoveY > deskHeight)
+                {
+                    tempMoveY = deskHeight;
+                    tempPressY = pressedPoint.y();
+
+                }
+                pressedPoint.setX(tempPressX);    //鼠标在截图区域中拖动结束后，选区的位置
+                pressedPoint.setY(tempPressY);
+                movePoint.setX(tempMoveX);
+                movePoint.setY(tempMoveY);
+            }
+            else {
+                switch( type )         //选区角落四个小矩形的位置
+                {
+                    case RECT1:               //意思是第一次选区之后，分别拖动四个角落的小矩形时候，截图选区的变化
+                        pressedPoint.setY(pressedPoint.y() + moveY);  //右上角的矩形
+                        movePoint.setX(movePoint.x() + moveX);
+                        break;
+                    case RECT2:
+                        pressedPoint.setX(pressedPoint.x() + moveX);    //左上角的矩形
+                        pressedPoint.setY(pressedPoint.y() + moveY);
+                        break;
+                    case RECT3:
+                        pressedPoint.setX(pressedPoint.x() + moveX);  //左下角的矩形
+                        movePoint.setY(movePoint.y() + moveY);
+                        break;
+                    case RECT4:
+                        movePoint.setX(movePoint.x() + moveX);     //右下角的矩形
+                        movePoint.setY(movePoint.y() + moveY);
+                        break;
+                    case RECT:                  //指的是当鼠标在截图选区中按下左键然后拖动时候，截图选区的整体位置变化
+                    {
+                        isDragRect = true;
+                        int tempPressX = pressedPoint.x() + moveX;
+                        int tempPressY = pressedPoint.y() + moveY;
+                        int tempMoveX = movePoint.x() + moveX;
+                        int tempMoveY = movePoint.y() + moveY;
+                        int deskWidth = pixmap.width();
+                        int deskHeight = pixmap.height();
+                        if( tempPressX < 0 )
+                        {
+                            tempPressX = 0;
+                            tempMoveX = movePoint.x();
+                        }
+                        if( tempPressX > deskWidth)
+                        {
+                            tempPressX = deskHeight;
+                        }
+                        if(tempPressY < 0)
+                        {
+                            tempPressY = 0;
+                            tempMoveY = movePoint.y();
+                        }
+                        if( tempPressY > deskHeight)
+                        {
+
+                            tempPressY = deskHeight;
+                        }
+                        if( tempMoveX < 0)
+                        {
+                            tempMoveX = 0;
+                        }
+                        if( tempMoveX > deskWidth)
+                        {
+                            tempMoveX = deskWidth;
+                            tempPressX = pressedPoint.x();
+                        }
+                        if( tempMoveY < 0)
+                        {
+                            tempMoveY = 0;
+                        }
+                        if( tempMoveY > deskHeight)
+                        {
+                            tempMoveY = deskHeight;
+                            tempPressY = pressedPoint.y();
+
+                        }
+                        pressedPoint.setX(tempPressX);    //鼠标在截图区域中拖动结束后，选区的位置
+                        pressedPoint.setY(tempPressY);
+                        movePoint.setX(tempMoveX);
+                        movePoint.setY(tempMoveY);
+                        break;
+                    }
+                    case NO:
+                        break;
+                    default:
+                        break;
+                }
             }
             oldPoint = tempPoint;    //更新位置坐标信息
         }
@@ -243,6 +297,7 @@ void Screen::mouseMoveEvent(QMouseEvent *e)
 
 void Screen::mouseReleaseEvent(QMouseEvent *e)
 {
+    isDragRect = false;
     oncePress = false;
     if( e->button() & Qt::LeftButton)
     {

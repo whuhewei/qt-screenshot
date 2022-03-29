@@ -86,5 +86,7 @@ private:
     bool   pointInRect(QPoint &p, QRectF &r);
 
     QSLabel *labelimage;
+
+    bool isDragRect = false; // 修复快速平移矩形，矩形跟不上的问题
 };
 #endif // SCREEN_H
