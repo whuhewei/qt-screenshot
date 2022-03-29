@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
         s->show();
     });
 
-    this->hotkey = new QHotkey(Qt::Key_P, Qt::ControlModifier, false, this);
+    this->hotkey = new QHotkey(Qt::Key_S, Qt::AltModifier, false, this);
     this->hotkey->setRegistered(true);
     connect(this->hotkey, &QHotkey::activated, [=](){
         Screen * s = new Screen;
