@@ -267,31 +267,37 @@ void Screen::mouseMoveEvent(QMouseEvent *e)
         }
         repaint();
     }
-    Type r = pointInWhere(e->pos());
-    if( r == RECT1)
+    if(isDragRect)
     {
-        type = RECT1;
-        comparePoint(pressedPoint, movePoint) ? setCursor(Qt::SizeBDiagCursor) : setCursor(Qt::SizeFDiagCursor);
-    } else if( r == RECT2)
-    {
-        type = RECT2;
-        comparePoint(pressedPoint, movePoint) ? setCursor(Qt::SizeFDiagCursor) : setCursor(Qt::SizeBDiagCursor);
-    } else if( r == RECT3)
-    {
-        type = RECT3;
-        comparePoint(pressedPoint, movePoint) ? setCursor(Qt::SizeBDiagCursor) : setCursor(Qt::SizeFDiagCursor);
-    } else if( r == RECT4)
-    {
-        type = RECT4;
-        comparePoint(pressedPoint, movePoint) ? setCursor(Qt::SizeFDiagCursor) : setCursor(Qt::SizeBDiagCursor);
-    } else if( r == RECT)
-    {
-        type = RECT;
         setCursor(Qt::SizeAllCursor);
-    } else
-    {
-        type = NO;
-        setCursor(Qt::ArrowCursor);
+    }
+    else{
+        Type r = pointInWhere(e->pos());
+        if( r == RECT1)
+        {
+            type = RECT1;
+            comparePoint(pressedPoint, movePoint) ? setCursor(Qt::SizeBDiagCursor) : setCursor(Qt::SizeFDiagCursor);
+        } else if( r == RECT2)
+        {
+            type = RECT2;
+            comparePoint(pressedPoint, movePoint) ? setCursor(Qt::SizeFDiagCursor) : setCursor(Qt::SizeBDiagCursor);
+        } else if( r == RECT3)
+        {
+            type = RECT3;
+            comparePoint(pressedPoint, movePoint) ? setCursor(Qt::SizeBDiagCursor) : setCursor(Qt::SizeFDiagCursor);
+        } else if( r == RECT4)
+        {
+            type = RECT4;
+            comparePoint(pressedPoint, movePoint) ? setCursor(Qt::SizeFDiagCursor) : setCursor(Qt::SizeBDiagCursor);
+        } else if( r == RECT)
+        {
+            type = RECT;
+            setCursor(Qt::SizeAllCursor);
+        } else
+        {
+            type = NO;
+            setCursor(Qt::ArrowCursor);
+        }
     }
 }
 
