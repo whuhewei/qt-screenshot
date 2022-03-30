@@ -28,15 +28,7 @@ QSLabel::QSLabel(QWidget* parent)
 
 void QSLabel::ontextchanged()
 {
-    if(m_plaintextedit->toPlainText().size()<10)
-       {
-           m_plaintextedit->resize(m_plaintextedit->toPlainText().size()*10+50,40);
-       }
-       else
-       {
-           m_plaintextedit->resize(m_plaintextedit->toPlainText().size()*15+20,m_plaintextedit->document()->size().rheight()+10);
-
-       }
+    m_plaintextedit->resize(m_plaintextedit->toPlainText().size()*16+200,m_plaintextedit->document()->size().rheight()+10);
 }
 
 void QSLabel::mouseMoveEvent(QMouseEvent *event)
