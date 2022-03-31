@@ -21,7 +21,7 @@ QSLabel::QSLabel(QWidget* parent)
     m_plaintextedit->setPalette(p1);
     connect(m_plaintextedit,SIGNAL(textChanged()),this,SLOT(ontextchanged()));
     m_plaintextedit->setStyleSheet("QTextEdit{ border: 1px solid #dadada; }"
-                                   "QTextEdit{font-family:'Microsoft YaHei'; font-size:16px;color:#ff0000;}"
+                                   "QTextEdit{font-family:'Microsoft YaHei'; font-size:18px;color:#ff0000;}"
                                    ""
                                    );
 }
@@ -75,6 +75,7 @@ void QSLabel::mousePressEvent(QMouseEvent *event)
             m_plaintextedit->move(startPoint);
             m_plaintextedit->show();
             m_plaintextedit->clear();
+            m_plaintextedit->setFocus();
         }
 }
 
@@ -155,7 +156,7 @@ void QSLabel::paintEvent(QPaintEvent *event)
            myText *text = texts[l];
            QRect rect = text->mRect;
            QFont font = painter.font();
-           font.setPixelSize(16);
+           font.setPixelSize(18);
            painter.setFont(font);
            painter.drawText(rect, Qt::TextWrapAnywhere, text->mText);
     }
