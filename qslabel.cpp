@@ -197,7 +197,8 @@ void QSLabel::drawarrow(QPoint startpoint, QPoint endpoint, QPainter &p)
         point4 = QPoint(endpoint.x() + int(-par*cosy + (par / 2.0*siny) - offsetx), endpoint.y() - int(par / 2.0*cosy + par*siny) + offsety);
         QPoint arrbodypoints[3]={startpoint,point3,point4};
         p.drawPolygon(arrbodypoints,3);
-
+        drawtrianglepen.setWidth(2);
+        p.setPen(drawtrianglepen);
 }
 
 void QSLabel::setimagetolabel(const QImage &image)
