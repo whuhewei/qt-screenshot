@@ -316,8 +316,17 @@ void Screen::mouseReleaseEvent(QMouseEvent *e)
         control->setStyleSheet("QWidget#control{\
                                background-color: #eaecf0;}");
         controlUi->setScreenQuote(this);
-        control->setGeometry(maxX - 400, maxY + 6, 400, 25);
+        // 当控制条出屏幕底部时，调整显示
+        if(maxY + 31 > this->height())
+        {
+            control->setGeometry(maxX - 400, maxY - 31, 400, 25);
+        }
+        else
+        {
+            control->setGeometry(maxX - 400, maxY + 6, 400, 25);
+        }
         control->show();
+        control->setCursor(Qt::PointingHandCursor);
     }
 }
 
