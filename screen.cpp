@@ -118,7 +118,7 @@ void Screen::mouseMoveEvent(QMouseEvent *e)
         maxX = pressedPoint.x() <= movePoint.x() ? movePoint.x() : pressedPoint.x();
         minY = pressedPoint.y() <= movePoint.y() ? pressedPoint.y() : movePoint.y();
         maxY = pressedPoint.y() <= movePoint.y() ? movePoint.y() : pressedPoint.y();
-        widthInfoRect.setText(tr("%1 * %2").arg((maxX - minX) * resolution).arg((maxY - minY) * resolution));   //将截图选区的长宽信息显示在widthinforect中
+        widthInfoRect.setText(tr("%1 * %2").arg((maxX - minX)).arg((maxY - minY)));   //将截图选区的长宽信息显示在widthinforect中
         widthInfoRect.setLocation(minX, minY);
         rect.setX(minX);
         rect.setY(minY);
