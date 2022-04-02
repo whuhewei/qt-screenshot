@@ -190,6 +190,8 @@ void QSLabel::drawarrow(QPoint startpoint, QPoint endpoint, QPainter &p)
         drawtrianglepen.setColor(Qt::red);
         drawtrianglepen.setWidth(1);
         p.setPen(drawtrianglepen);
+        QBrush brush(QColor(255, 0, 0)); //画刷
+        p.setBrush(brush); //添加画刷
         p.drawPolygon(points,3);
         int offsetx=int(par*siny/3);
         int offsety=int(par*cosy/3);
@@ -199,6 +201,7 @@ void QSLabel::drawarrow(QPoint startpoint, QPoint endpoint, QPainter &p)
         QPoint arrbodypoints[3]={startpoint,point3,point4};
         p.drawPolygon(arrbodypoints,3);
         drawtrianglepen.setWidth(2);
+        p.setBrush(Qt::NoBrush); // 还原填充
         p.setPen(drawtrianglepen);
 }
 
