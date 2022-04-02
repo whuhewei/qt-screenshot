@@ -36,6 +36,7 @@ void ControlWidget::cancelBtn_slot()
 //保存截图按钮
 void ControlWidget::saveBtn_slot()
 {
+    screen->cleartextborder();
     screen->savePixmap();
     cancelBtn_slot();
 }
@@ -43,6 +44,8 @@ void ControlWidget::saveBtn_slot()
 //完成按钮将截图保存到剪贴板
 void ControlWidget::finishBtn_slot()
 {
+    // 清除文字的边框
+    screen->cleartextborder();
     QClipboard *board = QApplication::clipboard();
     QImage img = screen->getGrabPixmap();
     board->setImage(img);
@@ -63,7 +66,6 @@ ControlWidget::~ControlWidget()
 
 void ControlWidget::on_drawLineBtn_clicked()
 {
-
     screen->drawline();
 }
 

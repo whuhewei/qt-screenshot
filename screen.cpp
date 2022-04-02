@@ -476,6 +476,11 @@ void Screen::textedit()
     labelimage->settexteditenable();
 }
 
+void Screen::cleartextborder()
+{
+    labelimage->cleartextborder();
+}
+
 void Screen::Exit()
 {
     if(labelimage)

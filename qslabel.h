@@ -46,6 +46,7 @@ public:
     void setroundenable();
     void settexteditenable();
     void settextedittovector();
+    void cleartextborder();
     void drawarrow(QPoint startpoint,QPoint endpoint,QPainter &p);
     void setimagetolabel(const QImage &image);
     QImage resultimage();

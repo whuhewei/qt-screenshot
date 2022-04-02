@@ -56,6 +56,7 @@ public:
     void drawarrow();
     void drawline();
     void textedit();
+    void cleartextborder();
 
     void Exit();
 

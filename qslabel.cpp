@@ -282,6 +282,12 @@ void QSLabel::settextedittovector()
     }
 }
 
+void QSLabel::cleartextborder()
+{
+    settextedittovector();
+    m_plaintextedit->hide();
+}
+
 QImage QSLabel::resultimage()
 {
     return QImage(QWidget::grab().toImage());
