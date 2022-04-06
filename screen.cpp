@@ -325,8 +325,8 @@ void Screen::mouseReleaseEvent(QMouseEvent *e)
         {
             control->setGeometry(maxX - 400, maxY + 6, 400, 25);
         }
-        control->show();
         control->setCursor(Qt::PointingHandCursor);
+        control->show();
     }
 }
 
