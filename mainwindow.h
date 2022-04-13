@@ -17,10 +17,14 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void quit();
+
 private:
     Ui::MainWindow *ui;
 
     QHotkey *hotkey;
+
+    Screen *s = NULL;
 };
 
 #endif // MAINWINDOW_H

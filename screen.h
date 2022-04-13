@@ -16,6 +16,8 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class Screen; }
 QT_END_NAMESPACE
 
+class MainWindow;
+
 class Screen : public QWidget
 {
     Q_OBJECT
@@ -60,6 +62,10 @@ public:
 
     void Exit();
 
+    void setMainWindowQuote(MainWindow *m);
+
+    void quit();
+
 private:
     Ui::Screen *ui;
     QPixmap pixmap;               //全屏
@@ -89,5 +95,7 @@ private:
     QSLabel *labelimage;
 
     bool isDragRect = false; // 修复快速平移矩形，矩形跟不上的问题
+
+    MainWindow *m;
 };
 #endif // SCREEN_H

@@ -31,6 +31,7 @@ void ControlWidget::cancelBtn_slot()
     {
         screen->close();
         screen->Exit();
+        screen->quit(); // 销毁screen对象
     }
 }
 //保存截图按钮

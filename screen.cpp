@@ -9,10 +9,12 @@
 #include <QFileDialog>
 #include <QApplication>
 #include <QTimer>
+#include "mainwindow.h"
 
 Screen::Screen(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::Screen)
+    ,m(NULL)
 {
     ui->setupUi(this);
     showFullScreen(); //将窗口部件全屏显示
@@ -410,10 +412,10 @@ void Screen::keyPressEvent(QKeyEvent *e)    //键盘事件，包括esc退出截�
     switch( key )
     {
     case Qt::Key_Escape :
-        close();
-        QTimer::singleShot(2000, this, [=](){
-            this->deleteLater();
-        });
+        if( controlUi )
+        {
+            controlUi->cancelBtn_slot();
+        }
         break;
     case Qt::Key_Enter:
         if( controlUi )
@@ -487,4 +489,14 @@ void Screen::Exit()
     {
         labelimage->close();
     }
+}
+
+void Screen::setMainWindowQuote(MainWindow *m)
+{
+    this->m = m;
+}
+
+void Screen::quit()
+{
+    m->quit();
 }
